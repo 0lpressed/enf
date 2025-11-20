@@ -54,4 +54,3 @@ class CustomUser(AbstractUser):
             value = getattr(self, field)
             if value:
                 setattr(self, field, strip_tags(value))
-
