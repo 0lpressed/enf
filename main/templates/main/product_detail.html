@@ -193,7 +193,7 @@
             console.log('No valid size selected');
         }
     }
-    
+
     function addToCart() {
         const productSlug = '{{ product.slug }}';
         console.log('Product Slug:', productSlug);
@@ -239,6 +239,7 @@
             showNotification('Error adding to cart');
         });
     }
+    
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {

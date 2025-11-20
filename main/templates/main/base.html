@@ -119,7 +119,7 @@
                 <h2 class="text-lg font-bold tracking-tight text-left">
                     ENFANTS RICHES <br>
                     DÉPRIMÉS
-                </h2>   
+                </h2>
                 <button id="closeMenu" class="hamburger active">
                     <span></span>
                     <span></span>
@@ -148,7 +148,7 @@
             
             <div class="mt-8 space-y-4">
                 <a href="#" class="block text-sm font-medium text-gray-900 hover:text-gray-700 py-2">SEARCH</a>
-               <a href="{% url 'users:profile' %}" 
+                <a href="{% url 'users:profile' %}" 
                 hx-get="{% url 'users:profile' %}" 
                 hx-target="#main-content" 
                 hx-push-url="true"
@@ -211,7 +211,7 @@
                     <a href="{% url 'users:profile' %}" 
                     hx-get="{% url 'users:profile' %}" 
                     hx-target="#main-content" 
-                    hx-push-url="true" 
+                    hx-push-url="true"
                     class="text-sm font-medium text-gray-900 uppercase hover:text-gray-600">
                         ACCOUNT
                     </a>
@@ -251,7 +251,7 @@
                        class="block p-8 border border-gray-200 hover:border-gray-300 transition-colors">
                         <h3 class="text-xl font-bold">{{ category.name|upper }}</h3>
                     </a>
-                    {% endfor %}    
+                    {% endfor %}
                 </div>
             </div>
         </main>
@@ -289,7 +289,7 @@
                 closeMobileMenu();
             });
     
-        // Cart functionality
+            // Cart functionality
             const desktopCart = document.getElementById('desktopCart');
             const mobileCart = document.getElementById('mobileCart');
             const mobileCartHeader = document.getElementById('mobileCartHeader');
