@@ -33,8 +33,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'aboba14.ru', 'www.aboba14.ru']
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://127.0.0.1:8000/',
-    'http://localhost:8000/',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
     'http://aboba14.ru',
     'http://www.aboba14.ru',
 ]
