@@ -29,11 +29,10 @@ class CatalogView(TemplateView):
 
     FILTER_MAPPING = {
         'color': lambda queryset, value: queryset.filter(color__iexact=value),
-        'min_price': lambda queryset, value: queryset.filter(price_gte=value),
-        'max_price': lambda queryset, value: queryset.filter(price_lte=value),
+        'min_price': lambda queryset, value: queryset.filter(price__gte=float(value)),
+        'max_price': lambda queryset, value: queryset.filter(price__lte=float(value)),
         'size': lambda queryset, value: queryset.filter(product_sizes__size__name=value),
     }
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -48,16 +47,19 @@ class CatalogView(TemplateView):
 
         query = self.request.GET.get('q')
         if query:
-            products = products.filter(
-                Q(name__icontains=query) | Q(description__icontains=query)
-            )
+            products = products.filter(Q(name__icontains=query) | Q(description__icontains=query))
 
         filter_params = {}
         for param, filter_func in self.FILTER_MAPPING.items():
             value = self.request.GET.get(param)
             if value:
-                products = filter_func(products, value)
-                filter_params[param] = value
+                try:
+                    # Преобразуем строку в число
+                    numeric_value = float(value)
+                    products = filter_func(products, numeric_value)
+                    filter_params[param] = str(numeric_value)
+                except ValueError:
+                    continue  # Игнорируем некорректные значения
             else:
                 filter_params[param] = ''
 
@@ -69,7 +71,7 @@ class CatalogView(TemplateView):
             'current_category': category_slug,
             'filter_params': filter_params,
             'sizes': Size.objects.all(),
-            'search_query': query or ''
+            'search_query': query or '',
         })
 
         if self.request.GET.get('show_search') == 'true':

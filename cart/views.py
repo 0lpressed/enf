@@ -59,17 +59,14 @@ class AddToCartView(CartMixin, View):
         
         size_id = form.cleaned_data.get('size_id')
         if size_id:
-            product_size = get_object_or_404(
-                ProductSize,
-                id=size_id,
-                product=product
-            )
+            product_size = get_object_or_404(ProductSize, id=size_id, product=product)
         else:
             product_size = product.product_sizes.filter(stock__gt=0).first()
-            if not product_size:
-                return JsonResponse({
-                    'error': 'No sizes available'
-                }, status=400)
+        if not product_size:
+            return JsonResponse({
+                'error': 'No available sizes'
+            }, status=400)
+
 
         quantity = form.cleaned_data['quantity']
         if product_size.stock < quantity:
